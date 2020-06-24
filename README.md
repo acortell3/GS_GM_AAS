@@ -9,5 +9,5 @@ Geomeasure analysis code needs the functions code
 
 Outlines for Geometric morphometrics analysis can be found as online material in the original article
 
-Two .csv files are provided. One (geo_df.csv) for phases on the GM analysis, and the other is the data for GS analysis
+Two .csv files are provided. One (geo_df.csv) for phases on the GM analysis, and the other (gs_data.csv) is the data for GS analysis
 
