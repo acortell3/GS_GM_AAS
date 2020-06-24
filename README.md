@@ -11,3 +11,5 @@ Outlines for Geometric morphometrics analysis can be found as online material in
 
 Two .csv files are provided. One (geo_df.csv) for phases on the GM analysis, and the other (gs_data.csv) is the data for GS analysis
 
+Any issues, please contact @ alfredo.cortell-nicolau@uv.es
+
