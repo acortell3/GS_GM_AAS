@@ -21,7 +21,8 @@
 #### About: This performs an outline geometric morphometrics analysis. Outlines are 
 #### provided as online resource 2. 
 
-#### Obtained results may be slightly different from the publication. See code line 49.
+#### To not to bias the results with orientations, we have decided to pick randomly the point
+#### to start the outline extraction. As a consequence results may slightly differ when reproducing
 
 #### GEOMETRIC MORPHOMETRICS ANALYSIS
 
@@ -29,7 +30,7 @@
 library(Momocs)
 
 ## Data
-geo_df <- read.csv('/Users/acortell/Desktop/GeoMorph/geo_df.csv', header = FALSE) ## Your route
+geo_df <- read.csv('~/geo_df.csv', header = FALSE) ## Your route
 geo_df <- geo_df[,c(1,6)]
 colnames(geo_df)<-c("Fase","ID")
 
@@ -42,17 +43,18 @@ geo_df$Fase<-sub("C2","C",geo_df$Fase)
 geo_df$Fase<-as.factor(geo_df$Fase) ## Phases as factors
 
 ## Extract outlines
-setwd('/Users/acortell/Desktop/GeoMorph/outlines') ## Folder where the outlines are stored
-geo.list<-list.files(pattern="*", recursive = TRUE) ## Order outlines
-#geo.list
-
-geo2<-Out(import_jpg(geo.list,auto.notcentered= T), fac=geo_df) ## Because auto.notcenterd = T, results may not be exactly the same. See package documentation
+setwd('~/outlines') ## Folder where the outlines are stored
+geo.list<-list.files(pattern="*")
+geo.list<-as.numeric(sub("jpg","",geo.list))
+geo.list<-sort(geo.list)
+geo.list<-paste0(geo.list,".jpg")
+geo2<-Out(import_jpg(geo.list, auto.notcentered = T), fac=geo_df)
 
 ## overlay
 # stack(coo_center(coo_scale(geo2)))
 
 ## Elliptical fourier analysis at n=20 harmonics
-geo2F <- efourier(coo_center(coo_scale(geo2)), nb.h = 20, norm=F, start=F)
+geo2F <- efourier(coo_center(coo_scale(geo2)), nb.h = 20, norm=F, start=T)
 
 ## PCA
 geo2.pca<-PCA(geo2F)
